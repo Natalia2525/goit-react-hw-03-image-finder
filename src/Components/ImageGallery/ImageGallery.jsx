@@ -3,7 +3,9 @@ import ImageGalleryItem from '../ImageGalleryItem';
 
 const ImageGallery = ({ gallery }) => {
   return (
-    <ul className={st.ImageGallery}>{gallery.map(<ImageGalleryItem />)}</ul>
+    <ul className={st.ImageGallery}>
+      {<ImageGalleryItem gallery={gallery} />}
+    </ul>
   );
 };
 

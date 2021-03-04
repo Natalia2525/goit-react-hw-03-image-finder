@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import st from './Searchbar.module.css';
+import { toast } from 'react-toastify';
 
 const Searchbar = ({ onSubmit }) => {
-  const [searchQwery, setsearchQwery] = useState('');
+  const [searchQuery, setsearchQuery] = useState('');
 
   const handleChange = e => {
-    setsearchQwery(e.target.value);
+    setsearchQuery(e.target.value);
   };
   const handleSubmit = e => {
     e.preventDefault();
-
-    onSubmit(searchQwery);
+    if (searchQuery === '') {
+      toast.error('Введите запрос');
+      return;
+    }
+    onSubmit(searchQuery);
+    setsearchQuery('');
   };
 
   return (
@@ -23,6 +28,7 @@ const Searchbar = ({ onSubmit }) => {
         <input
           className={st.SearchForm_input}
           type="text"
+          value={searchQuery}
           // autocomplete="off"
           // autofocus
           placeholder="Search images and photos"

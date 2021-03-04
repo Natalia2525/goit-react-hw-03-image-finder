@@ -1,10 +1,19 @@
 import st from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = () => {
+const ImageGalleryItem = ({ gallery }) => {
   return (
-    <li className="ImageGalleryItem">
-      <img src="" alt="" className={st.ImageGalleryItem_image} />
-    </li>
+    <>
+      {gallery.map(img => (
+        <li className="ImageGalleryItem" key={img.id}>
+          <img
+            src={img.webformatURL}
+            alt=""
+            className={st.ImageGalleryItem_image}
+            data-image={img.largeImageURL}
+          />
+        </li>
+      ))}
+    </>
   );
 };
 
