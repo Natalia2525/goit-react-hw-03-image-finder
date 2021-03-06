@@ -4,12 +4,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import Searchbar from './Components/Searchbar';
 import { fetchImages } from './Components/service';
 import ImageGallery from './Components/ImageGallery';
+import Spinner from './Components/Spinner';
+import ButtonLoadMore from './Components/Button/Button';
+import ModalImage from './Components/Modal';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [searchQuery, setsearchQuery] = useState('');
+  const [largeImage, setLargetImages] = useState('');
 
   useEffect(() => {
     if (searchQuery === '') {
@@ -19,25 +23,15 @@ const App = () => {
 
     return fetchImages({ page, searchQuery })
       .then(hits => setImages(hits))
-      // .then(() => {
-      //   window.scrollTo({
-      //     top: document.body.scrollHeight,
-      //     behavior: 'smooth',
-      //   });
-      // })
+      .then(() => scrollTo())
       .catch(error => toast.error('Error'))
       .finally(() => setIsLoading(false));
   }, [page, searchQuery]);
 
   const scrollTo = () => {
-    setTimeout(() => {
-      window.scrollTo(
-        {
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth',
-        },
-        2000,
-      );
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
     });
   };
   const handleSubmit = searchQuery => {
@@ -45,10 +39,35 @@ const App = () => {
     setPage(1);
     setImages([]);
   };
+
+  const handleClickNextPage = () => {
+    setPage(page + 1);
+  };
+
+  //Modal
+  const handleClickImg = e => {
+    e.preventDefault();
+    if (e.target.nodeName === 'IMG') {
+      setLargetImages(e.target.dataset.image);
+    }
+  };
+
+  const toggleModal = () => {
+    setLargetImages('');
+  };
+
   return (
     <>
       <Searchbar onSubmit={handleSubmit} />
-      <ImageGallery gallery={images} />
+      <ImageGallery gallery={images} onClick={handleClickImg} />
+      {isLoading && <Spinner />}
+      {images.length > 0 && <ButtonLoadMore onClick={handleClickNextPage} />}
+
+      {largeImage && (
+        <ModalImage onClose={toggleModal}>
+          <img src={largeImage} alt="modal" />
+        </ModalImage>
+      )}
       <ToastContainer autoClose={1000} />
     </>
   );

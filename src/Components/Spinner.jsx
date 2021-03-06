@@ -8,10 +8,10 @@ class Spinner extends Component {
       <Loader
         style={{ textAlign: 'center' }}
         className="Loader"
-        type="ThreeDots"
-        color="#303f9f"
-        height={50}
-        width={50}
+        type="Circles"
+        color="#00BFFF"
+        height={80}
+        width={80}
       />
     );
   }

@@ -1,13 +1,13 @@
-import st from './ButtonLoadMore.module.css';
+import st from './Button.module.css';
 
-const ButtonLoadMore = () => {
+const ButtonLoadMore = ({ onClick }) => {
   const scrollFunction = () =>
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth',
     });
   return (
-    <button onClick={scrollFunction} className={st.button} type="button">
+    <button onClick={onClick} className={st.Button} type="button">
       Load more
     </button>
   );

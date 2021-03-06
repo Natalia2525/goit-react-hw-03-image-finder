@@ -1,10 +1,10 @@
 import st from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ gallery }) => {
+const ImageGalleryItem = ({ gallery, onClick }) => {
   return (
     <>
       {gallery.map(img => (
-        <li className="ImageGalleryItem" key={img.id}>
+        <li className="ImageGalleryItem" key={img.id} onClick={onClick}>
           <img
             src={img.webformatURL}
             alt=""
