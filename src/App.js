@@ -22,7 +22,7 @@ const App = () => {
     setIsLoading(true);
 
     return fetchImages({ page, searchQuery })
-      .then(hits => setImages(hits))
+      .then(hits => setImages([...images, ...hits]))
       .then(() => scrollTo())
       .catch(error => toast.error('Error'))
       .finally(() => setIsLoading(false));
