@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import Searchbar from './Components/Searchbar';
-import { fetchImages } from './Components/service';
+import { fetchImages } from './service/service';
 import ImageGallery from './Components/ImageGallery';
 import Spinner from './Components/Spinner';
 import ButtonLoadMore from './Components/Button/Button';
@@ -57,7 +58,7 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className='app'>
       <Searchbar onSubmit={handleSubmit} />
       <ImageGallery gallery={images} onClick={handleClickImg} />
       {isLoading && <Spinner />}
@@ -69,7 +70,7 @@ const App = () => {
         </ModalImage>
       )}
       <ToastContainer autoClose={1000} />
-    </>
+    </div>
   );
 };
 
