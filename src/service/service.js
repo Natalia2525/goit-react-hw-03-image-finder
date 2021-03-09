@@ -11,7 +11,7 @@ import axios from 'axios';
 //     .then(({ data }) => data.hits)
 // };
 
-const BASE_URL = 'https://pixabay.com/api';
+const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '19731613-0dd9928f669764263ad400b12';
 
 axios.defaults.baseURL = BASE_URL;

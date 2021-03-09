@@ -58,7 +58,7 @@ const App = () => {
   };
 
   return (
-    <div className='app'>
+    <div className="app">
       <Searchbar onSubmit={handleSubmit} />
       <ImageGallery gallery={images} onClick={handleClickImg} />
       {isLoading && <Spinner />}
