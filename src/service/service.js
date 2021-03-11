@@ -29,7 +29,7 @@ axios.defaults.params = {
 const fetchImages = async ({ searchQuery, page }) => {
   try {
     const { data } = await axios.get('', {
-      params: { searchQuery, page },
+      params: { q: searchQuery, page },
     });
     return data.hits;
   } catch (error) {
